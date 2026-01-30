@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myservice
+  name: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myservice
+      app: backend
   template:
     metadata:
       labels:
-        app: myservice
+        app: backend
     spec:
       containers:
-        - image: oraph/myservice:1
+        - image: oraph/backend:1
           imagePullPolicy: IfNotPresent
-          name: myservice
+          name: backend
       restartPolicy: Always

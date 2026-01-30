@@ -5,14 +5,14 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: myservice.info
+    - host: backend.info
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: myservice
+                name: backend
                 port:
                   number: 8080
     - host: myservice2.info
