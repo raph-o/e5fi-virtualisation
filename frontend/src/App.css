@@ -1,0 +1,45 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #121212;
+    color: white;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.table-wrapper {
+    flex-grow: 1;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.url-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.url-table th, .url-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
