@@ -14,8 +14,7 @@ export class BackendService {
     url: string;
 
     public constructor() {
-        //this.url = import.meta.env.VITE_BACKEND_URL;
-        this.url = "http://localhost:8080";
+        this.url = import.meta.env.VITE_BACKEND_URL;
     }
 
     public async getShortenedUrls(): Promise<ShortenedUrl[]> {
