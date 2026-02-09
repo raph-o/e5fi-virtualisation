@@ -27,16 +27,16 @@ public class MyServiceRest {
 
   @SneakyThrows
   @PostMapping("/api/shorten")
-  public ResponseEntity<String> createEncodedUrl(@RequestBody ShortenRequest shortenRequest) {
+  public ResponseEntity<ShortenedUrl> createEncodedUrl(@RequestBody ShortenRequest shortenRequest) {
     String url = shortenRequest.url;
     String decodedUrl = URLDecoder.decode(url, StandardCharsets.UTF_8);
     String encodedUrl = encodedUrl(decodedUrl);
 
-    if (!shortenedUrlRepository.existsByEncodedUrl(encodedUrl)) {
-      shortenedUrlRepository.save(new ShortenedUrl(decodedUrl, encodedUrl));
-    }
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(encodedUrl);
+    ShortenedUrl shortenedUrl =
+        shortenedUrlRepository
+            .findByEncodedUrl(encodedUrl)
+            .orElseGet(() -> shortenedUrlRepository.save(new ShortenedUrl(decodedUrl, encodedUrl)));
+    return ResponseEntity.status(HttpStatus.CREATED).body(shortenedUrl);
   }
 
   @GetMapping("/api/shortened")
