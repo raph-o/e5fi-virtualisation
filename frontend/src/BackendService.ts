@@ -1,3 +1,11 @@
+declare global {
+    interface Window {
+        __APP_CONFIG__?: {
+            BACKEND_URL?: string;
+        };
+    }
+}
+
 export type ShortenedUrl =
     {
         id: number;
@@ -14,7 +22,9 @@ export class BackendService {
     url: string;
 
     public constructor() {
-        this.url = import.meta.env.VITE_BACKEND_URL;
+        this.url = window.__APP_CONFIG__?.BACKEND_URL
+            ?? import.meta.env.VITE_BACKEND_URL
+            ?? "";
     }
 
     public async getShortenedUrls(): Promise<ShortenedUrl[]> {

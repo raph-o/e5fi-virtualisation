@@ -13,7 +13,7 @@ spec:
         app: backend
     spec:
       containers:
-        - image: oraph/backend:1
+        - image: oraph/backend:2
           imagePullPolicy: IfNotPresent
           name: backend
       restartPolicy: Always

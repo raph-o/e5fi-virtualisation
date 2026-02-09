@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  config.js: |
+    window.__APP_CONFIG__ = {
+        BACKEND_URL: "http://backend.info"
+    };
