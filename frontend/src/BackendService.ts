@@ -1,11 +1,3 @@
-declare global {
-    interface Window {
-        __APP_CONFIG__?: {
-            BACKEND_URL?: string;
-        };
-    }
-}
-
 export type ShortenedUrl =
     {
         id: number;
@@ -19,16 +11,12 @@ export type ShortenUrlRequest =
     }
 
 export class BackendService {
-    url: string;
-
-    public constructor() {
-        this.url = window.__APP_CONFIG__?.BACKEND_URL
-            ?? import.meta.env.VITE_BACKEND_URL
-            ?? "";
-    }
+    private readonly listShortened = "/api/shortened";
+    private readonly shorten = "/api/shorten";
+    private readonly redirect = "/api/shortened/{encodedUrl}";
 
     public async getShortenedUrls(): Promise<ShortenedUrl[]> {
-        const response = await fetch(`${this.url}/api/shortened`);
+        const response = await fetch(this.listShortened);
         if (!response.ok) {
             throw new Error(`Error while getting the shortened: ${response.status}`);
         }
@@ -37,11 +25,11 @@ export class BackendService {
     }
 
     public getFullUrl(shortenedUrl: ShortenedUrl): string {
-        return `${this.url}/${shortenedUrl.encodedUrl}`;
+        return this.redirect.replace("{encodedUrl}", shortenedUrl.encodedUrl);
     }
 
     public async shortenUrl(shortenUrlRequest: ShortenUrlRequest): Promise<ShortenedUrl> {
-        const response = await fetch(`${this.url}/api/shorten`, {
+        const response = await fetch(this.shorten, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

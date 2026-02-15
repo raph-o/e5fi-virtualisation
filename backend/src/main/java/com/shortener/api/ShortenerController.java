@@ -21,7 +21,7 @@ public class ShortenerController {
   private record ShortenRequest(String url) {}
 
   @SneakyThrows
-  @PostMapping("/api/shorten")
+  @PostMapping("/shorten")
   public ResponseEntity<ShortenedUrl> createEncodedUrl(@RequestBody ShortenRequest shortenRequest) {
     String url = shortenRequest.url;
     String decodedUrl = URLDecoder.decode(url, StandardCharsets.UTF_8);
@@ -31,12 +31,12 @@ public class ShortenerController {
     return ResponseEntity.status(HttpStatus.CREATED).body(shortenedUrl);
   }
 
-  @GetMapping("/api/shortened")
+  @GetMapping("/shortened")
   public ResponseEntity<List<ShortenedUrl>> listShortenedUrls() {
     return ResponseEntity.status(HttpStatus.OK).body(shortenerService.getShortenedUrls());
   }
 
-  @GetMapping("/{encodedUrl}")
+  @GetMapping("/shortened/{encodedUrl}")
   public ResponseEntity<Void> redirectToUrl(@PathVariable String encodedUrl) {
     URI shortenedUrl = shortenerService.getShortenedUrl(encodedUrl);
     return ResponseEntity.status(HttpStatus.TEMPORARY_REDIRECT).location(shortenedUrl).build();

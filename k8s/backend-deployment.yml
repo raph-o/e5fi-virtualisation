@@ -14,13 +14,22 @@ spec:
     spec:
       containers:
         - name: backend
-          image: oraph/backend:2
-          imagePullPolicy: IfNotPresent
+          image: shortener-app-backend:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://postgres:5432/shortenerDb"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "postgres"
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-password
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
