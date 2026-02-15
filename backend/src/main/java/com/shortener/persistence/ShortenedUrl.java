@@ -1,4 +1,4 @@
-package com.example.myservice.persistence;
+package com.shortener.persistence;
 
 import jakarta.persistence.*;
 import java.io.Serializable;

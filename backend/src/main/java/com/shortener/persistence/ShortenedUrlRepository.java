@@ -1,4 +1,4 @@
-package com.example.myservice.persistence;
+package com.shortener.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
