@@ -18,11 +18,8 @@ ingress.
 Il faut exécuter les commandes suivantes dans l'ordre:
 
 1. `minikube addons enable ingress`
-2. `kubectl apply -f ingress.yml`
-3. `kubectl apply -f backend-deployment.yml`
-4. `kubectl apply -f backend-service.yml`
-5. `kubectl apply -f frontend-config.yml`
-6. `kubectl apply -f frontend-deployment.yml`
-7. `kubectl apply -f frontend-service.yml`
-8. `minikube addons enable ingress-dns`
-9. `minikube tunnel`
+2. `kubectl apply -f k8s/ingress.yml`
+3. `kubectl apply -f k8s/backend-deployment.yml`
+4. `kubectl apply -f k8s/frontend-deployment.yml`
+5. `minikube addons enable ingress-dns`
+6. `minikube tunnel`
